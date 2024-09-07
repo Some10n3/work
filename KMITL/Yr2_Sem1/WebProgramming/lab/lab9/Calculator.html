@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calculator</title>
+        <link rel="stylesheet" href="cal_styles.css">
+    </head>
+    <body>
+        <table id="myTable">
+            <tr>
+                <td colspan= "4" style="text-align: right;">
+                    <label id="result">0</label>
+                </td>
+            </tr> 
+            <tr>
+                <td id="Backspace"><</td>
+                <td id="/">/</td>
+                <td id="*">*</td>
+                <td id="-" style="font-family: 'Courier New', Courier, monospace; font-weight:bold;">-</td>
+            </tr>
+            <tr>
+                <td id="7">7</td>
+                <td id="8">8</td>
+                <td id="9">9</td>
+                <td id="+" rowspan="2">+</td>
+            </tr>
+            <tr>
+                <td id="4">4</td>
+                <td id="5">5</td>
+                <td id="6">6</td>
+            </tr>
+            <tr>
+                <td id="1">1</td>
+                <td id="2">2</td>
+                <td id="3">3</td>
+                <td id="Enter" rowspan="2">=</td>
+            </tr>
+            <tr>
+                <td id="0" colspan="2">0</td>
+                <td id="c" style="font-weight: bold;">C</td>
+            </tr>
+        </table>
+
+        <script>
+            const output = document.getElementById('result');
+            let currentExpression = '';
+
+            // Keyup event handler
+            document.addEventListener('keyup', (event) => {
+                const key = event.key;
+                
+                // Check if the pressed key is a number or an operator
+                if (!isNaN(key) || key === '+' || key === '-' || key === '*' || key === '/') {
+                    currentExpression += key;
+                    output.innerHTML = currentExpression;
+                } else if (key === 'Enter' || key === '=') {
+                    try {
+                    // Try to evaluate the expression when Enter key is pressed
+                    const result = eval(currentExpression);
+                    output.innerHTML = result;
+                    currentExpression = result.toString(); // Store the result as the new expression
+                    } catch (error) {
+                    output.innerHTML = 'Error';
+                    currentExpression = ''; // Clear the expression in case of an error
+                    }
+                } else if (key === 'Backspace') {
+                    // Handle backspace to remove the last character
+                    currentExpression = currentExpression.slice(0, -1);
+                    output.innerHTML = currentExpression;
+                } else if (key === 'c' || key === 'C') {
+                    // Clear the expression when 'C' or 'c' is pressed
+                    currentExpression = '';
+                    output.innerHTML = '0';
+                }
+            });
+
+            // Click event handler
+
+
+            // Add event listener to all the buttons
+            const buttons = document.querySelectorAll('td');
+
+            document.addEventListener('click', (event) => {
+                const element = event.target;
+                const key = element.id;
+
+                switch (key){
+                    case 'Enter':
+                        try {
+                        // Try to evaluate the expression when Enter key is pressed
+                        const result = eval(currentExpression);
+                        output.innerHTML = result;
+                        currentExpression = result.toString(); // Store the result as the new expression
+                        } catch (error) {
+                        output.innerHTML = 'Error';
+                        currentExpression = ''; // Clear the expression in case of an error
+                        }
+                        break;
+                    case 'c':
+                        currentExpression = '';
+                        output.innerHTML = '0';
+                        break;
+                    case 'Backspace':
+                        // Handle backspace to remove the last character
+                        currentExpression = currentExpression.slice(0, -1);
+                        output.innerHTML = currentExpression;
+                        if (currentExpression === '') {
+                            output.innerHTML = '0';
+                        }
+                        break;
+                    //case when clicking numbers
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                        currentExpression += key;
+                        output.innerHTML = currentExpression;
+                        break;
+                    default:
+                        // Check if the pressed key is a number or an operator
+                        if (!isNaN(key) || key === '+' || key === '-' || key === '*' || key === '/') {
+                            currentExpression += key;
+                            output.innerHTML = currentExpression;
+                            if (currentExpression === '') {
+                                currentExpression = '0';
+                            }
+                        }
+                }
+            });
+        </script>
+    </body>
+</html>

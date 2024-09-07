@@ -1,0 +1,12 @@
+cd var/__nse/libs/build-scn/
+cmake -GNinja ../scnlib-1.1.2
+ccmake -GNinja ../scnlib-1.1.2
+cmake --build .
+cmake --install .
+cd ../build-fmt
+ccmake -GNinja ../fmt-9.1.0
+cmake -GNinja ../fmt-9.1.0
+cmake --build .
+cmake -GNinja ../fmt-9.1.0 --install-prefix /home/user/opt/cmake-packages/fmt
+cmake --build .
+cmake --install .

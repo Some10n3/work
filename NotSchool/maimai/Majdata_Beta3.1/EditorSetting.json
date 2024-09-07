@@ -1,0 +1,23 @@
+{
+  "AutoCheckUpdate": true,
+  "DefaultSlideAccuracy": 0.2,
+  "Language": "en-US",
+  "PlayPauseKey": "Ctrl+Shift+c",
+  "PlayStopKey": "Ctrl+Shift+x",
+  "SendViewerKey": "Ctrl+Shift+z",
+  "SaveKey": "Ctrl+s",
+  "IncreasePlaybackSpeedKey": "Ctrl+p",
+  "DecreasePlaybackSpeedKey": "Ctrl+o",
+  "FontSize": 12.0,
+  "RenderMode": 1,
+  "playSpeed": 7.0,
+  "touchSpeed": 7.5,
+  "backgroundCover": 1.0,
+  "Default_BGM_Level": 0.8,
+  "Default_Tap_Level": 1.0,
+  "Default_Slide_Level": 0.3,
+  "Default_Break_Level": 0.6,
+  "Default_Ex_Level": 0.4,
+  "Default_Touch_Level": 0.5,
+  "Default_Hanabi_Level": 0.4
+}

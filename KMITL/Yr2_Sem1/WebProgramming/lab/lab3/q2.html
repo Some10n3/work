@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="http://161.246.5.61/Lab.js"></script>
+        <title>Question 2</title>
+        <style>
+            table {
+                width: 85%;
+                margin : 0 auto;
+                border-collapse: collapse;
+                /* border: 1px solid #ddd; */
+            }
+            td.bigbold {
+                font-weight: bold;
+                font-size: 20px;
+            }
+            div.high {
+                height: 40px;
+            }
+            div.higher {
+                height: 80px;
+            }
+        </style>
+    </head>
+    <body>
+        <form action="/submit_profile" method="post">
+            <br><br>
+            <table>
+                <tr>
+                    <td rowspan="9" style="width: 45%;"><img src="image.png" alt="Girl in a jacket" width="200" height="200"></td>
+                    <td class="bigbold">Personal Information</td>
+                </tr>
+                <tr>
+                    <td><label for="name">Name:</label></td>
+                </tr>
+                <tr>
+                    <td><input type="text" id="name" name="name" required></td>
+                </tr>
+                <tr>
+                    <td><label for="age">Age(0-100):</label></td>
+                </tr>
+                <tr>
+                    <td><input id="age" type="range" min="0" max="100" step= "1" value="50"></td>
+                <tr>
+                    <td><label for="email">Email:</label></td>
+                </tr>
+                <tr>
+                    <td><input type="email" id="email" name="email" required></td>
+                </tr>
+                <tr>
+                    <td><label for="phone">Phone Number:</label></td>
+                </tr>
+                <tr>
+                    <td><input type="tel" id="phone" name="phone" required></td>
+                </tr>
+                <tr>
+                    <td><label for="profile">Description:</label></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><textarea id="profile" name="profile" rows="4" cols="50" required></textarea></td>
+                </tr>
+                <tr>
+                    <td><label for="street">Address:</label></td>
+                    <td><label for="university">University:</label></td>
+                </tr>
+                <tr>
+                    <td><textarea id="street" name="Address" rows="4" cols="50" required></textarea></td>
+                    <td><input type="text" id="university" name="University" required></td>
+                </tr>
+                <tr>
+                    <td>Country <input type="text" id="city" name="Address" required></td>
+                    <td><label for="degree">Degree:</label></td>
+                </tr>
+                <tr>
+                    <td>
+                        <select id="country">
+                            <option value="Thailand">Option 1</option>
+                            <option value="England">Option 2</option>
+                            <option value="Scorland">Option 3</option>
+                        </select>
+                    </td>
+                    <td><div class="high"><input type="text" id="degree" name="Degree" required></div></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="graduationYear">Year of Graduation:</label></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><div class="higher"><input type="number" id="graduationYear" name="Graduation" min="1900" max="2099" step="1" value="2020" required></div></td>
+                </tr>
+                <tr>
+                    <td><div class="high">Contact:</div></td>
+                    <td><div class="high">Skills & Experiences:</div></td>
+                </tr>
+                <tr>
+                    <td><label for="ref">Reference:</label></td>
+                    <td><label for="skills">Skills:</label></td>
+                </tr>
+                <tr>
+                    <td><div class="higher"><textarea id="ref" name="Reference" rows="4" cols="50" required></textarea></div></td>
+                    <td><div class="higher"><textarea id="skills" name="Skills" rows="4" cols="50" required></textarea></div></td>
+                </tr>
+                <tr>
+                    <td><label for="favColour">Favorite Colour:</label></td>
+                    <td><label for="experience">Experience:</label></td>
+                </tr>
+                <tr>
+                    <td><input type="color" id="favColour" onchange="clickColor(0, -1, -1, 5)" value="#ff0000" style="width:85%;"></td>
+                    <td><textarea id="experience" name="Experience" rows="4" cols="50" required></textarea></td>
+                </tr>
+
+            </table>
+
+            <br>
+            <button type="button" value="Submit" style="margin-left: 115px;" onclick="displayResume()">Submit</button>
+        </form>
+    </body>
+</html>

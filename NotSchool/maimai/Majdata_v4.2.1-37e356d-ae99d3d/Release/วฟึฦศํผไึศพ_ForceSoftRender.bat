@@ -1,0 +1,1 @@
+start MajdataEdit.exe --ForceSoftwareRender

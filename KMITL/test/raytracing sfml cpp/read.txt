@@ -1,0 +1,9 @@
+Wtf is ray tracing
+
+
+Code from here
+https://codereview.stackexchange.com/questions/190662/2d-raycasting-implementation
+
+Also, this sfml vid god. (same as cpp proj in yr1 sem2)
+https://youtu.be/Ptw1KKI9_Sg
+https://permadi.com/1996/05/ray-casting-tutorial-table-of-contents/

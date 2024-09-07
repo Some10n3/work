@@ -1,0 +1,36 @@
+table {
+    width: 85%;
+    margin : 0 auto;
+    border-collapse: collapse;
+    /* border: 1px solid #ddd; */
+}
+thead {
+    background-color: #c481ff;
+}
+td {
+    color: rgb(41, 32, 218);
+    font-family: 'Times New Roman';
+}
+label {
+    font-weight: bold;
+    font-size: 20px;
+} 
+td.bigbold {
+    font-weight: bold;
+    font-size: 30px;
+}
+div.high {
+    height: 40px;
+}
+div.higher {
+    height: 80px;
+}
+div.pinkBG {
+    background-color: #FF00FF;
+}
+.colorful {
+    color: #ff0000;
+}
+a:hover {
+    color: #FF00aF;
+}

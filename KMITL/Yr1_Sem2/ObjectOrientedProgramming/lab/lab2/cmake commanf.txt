@@ -1,0 +1,4 @@
+mkdir build
+CD build
+cmake -GNinja ../
+cmake --build .

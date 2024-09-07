@@ -1,0 +1,29 @@
+div {
+    font-size: 20px;
+    color: rgb(114, 114, 255);
+}
+.float-container {
+    width: 100%;
+    justify-content: center;
+    /* border: 1px solid #555; */
+    padding-left: 150px;
+    /* margin: 0 auto; */
+}
+.float-child {
+    width: 48%;
+    float: left;
+    padding: 10px;
+    box-sizing: border-box;
+    /* border: 1px solid #555; */
+}
+.text {
+    /* text-align: center; */
+    font-size: 28px;
+    font-weight: bold;
+}
+a:hover {
+    color: #FF00aF;
+}
+/* input[placeholder], [placeholder], *[placeholder] {
+    color: rgb(114, 114, 255) !important;
+} */

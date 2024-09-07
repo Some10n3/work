@@ -1,0 +1,59 @@
+@startuml
+
+interface GuitarBehavior {
+    +play()
+}
+
+interface SoloBehavior {
+    +solo()
+}
+
+abstract class GameCharacter {
+    -GuitarBehavior guitarBehavior
+    -SoloBehavior soloBehavior
+    
+    +GameCharacter()
+    +playGuitar()
+    +playSolo()
+    +setGuitar(GuitarBehavior g)
+    +setSolo(SoloBehavior s)
+    +change()
+}
+
+class GameCharacterAngus {
+    +GameCharacterAngus()
+    +change()
+}
+
+class GameCharacterSlash {
+    +GameCharacterSlash()
+    +change()
+}
+
+class GameCharacterHendrix {
+    +GameCharacterHendrix()
+}
+
+class Guitar_Telecaster implements GuitarBehavior {
+    +play()
+}
+
+class Guitar_GibsonSG implements GuitarBehavior {
+    +play()
+}
+
+class Guitar_GibsonLP implements GuitarBehavior {
+    +play()
+}
+
+GameCharacter --> GuitarBehavior : uses
+GameCharacter --> SoloBehavior : uses
+GameCharacterAngus --|> GameCharacter
+GameCharacterSlash --|> GameCharacter
+GameCharacterHendrix --|> GameCharacter
+
+Guitar_Telecaster --|> GuitarBehavior
+Guitar_GibsonSG --|> GuitarBehavior
+Guitar_GibsonLP --|> GuitarBehavior
+
+@enduml

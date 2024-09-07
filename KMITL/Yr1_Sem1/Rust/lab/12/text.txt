@@ -1,0 +1,15 @@
+job: Teacher
+name: neo
+age: 18
+location: 25.07542, -90.84256
+students: wish, arus, sura
+job: Admiral
+name: ming
+age: 30
+location: -32.45020, 13.05096
+ships: HMS Majestic, HMS Unicorn, HMS Ark Royal
+job: Doctor
+name: chen
+age: 25
+location: 25.79829, 178.00369
+patients: echo, jirawad, Jane

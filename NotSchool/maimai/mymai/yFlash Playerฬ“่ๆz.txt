@@ -1,0 +1,51 @@
+基本的にはAdobe Flash Player公式の【プロジェクター】を推奨。
+自動で1280x720pxの大きさで開いてくれるので、一番使い勝手がいいです。
+
+★★★Adobe Flash Player公式サイトでの手順
+
+1.
+
+https://www.adobe.com/support/flashplayer/debug_downloads.html
+
+にアクセスする。
+
+2.
+
+●Windowsの場合
+
+	太字で『Windows』と書かれている段落を探す。
+
+	その中の【Download the Flash Player projector】という文字列を見つけたら、それをクリック。
+
+	「flashplayer_○○_sa.exe」というexeファイルがダウンロードされる。 (○○はバージョンの数字)
+
+	このファイルを、3simai_@@@.exe、bg.jpg、maidata.txt、track.mp3が置いてあるフォルダに置く。 (@@@はsimaiのバージョンの数字)
+
+●Mac OSの場合
+
+	太字で『Macintosh』と書かれている段落を探す。
+
+	その中の【Download the Flash Player projector】という文字列を見つけたら、それをクリック。
+
+	「flashplayer_○○_sa.dmg」というdmgファイルがダウンロードされる。 (○○はバージョンの数字)
+
+	このファイルを、3simai_@@@.exe、bg.jpg、maidata.txt、track.mp3が置いてあるフォルダに置く。 (@@@はsimaiのバージョンの数字)
+
+3.
+
+先程ダウンロードしてきた、「flashplayer_○○_sa.exe」または「flashplayer_○○_sa.dmg」をダブルクリックで開く。
+
+おそらく、真っ白か真っ黒なウィンドウが表示されると思われる。
+
+このウィンドウに対して、3simai_@@@.exeをドラッグアンドドロップする。
+
+成功していれば、3simaiのスタンバイ画面が表示される。
+
+
+
+このソフト以外でも、swfファイルが再生できるプレーヤー・ソフトなら動作します。
+
+Adobe以外のものがいい！という場合は、以下の検索結果等から探してみるといいかもしれません。
+
+https://www.google.com/search?q=swf+%E3%83%95%E3%83%AA%E3%83%BC+%E3%83%97%E3%83%AC%E3%83%BC%E3%83%A4%E3%83%BC&oq=swf&aqs=chrome.0.69i59l2j69i57j69i59j69i60l2.1451j0j7&sourceid=chrome&ie=UTF-8
+

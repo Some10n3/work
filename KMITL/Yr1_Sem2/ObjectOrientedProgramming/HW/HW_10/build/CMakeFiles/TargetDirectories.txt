@@ -1,0 +1,8 @@
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/CMakeFiles/q1.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/CMakeFiles/q12.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/CMakeFiles/q2.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/CMakeFiles/edit_cache.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/CMakeFiles/rebuild_cache.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/nse/CMakeFiles/nse_html.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/nse/CMakeFiles/edit_cache.dir
+D:/Main/Work/KMITL/Yr1_Sem2/ObjectOrientedProgramming/ObjectOrientedProgramming/HW/HW_10/build/nse/CMakeFiles/rebuild_cache.dir

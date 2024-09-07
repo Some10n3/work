@@ -1,0 +1,22 @@
+function init(self)
+	msg.post(".", "acquire_input_focus")
+	msg.post("@render:", "use_fixed_fit_projection", { near = -1, far = 1 })
+
+	local my_url = msg.url()
+	print("main.script : " .. my_url) --> url: [current_collection:/my_instance#my_component]
+
+	msg.post("#start_proxy", "load")
+end
+
+function on_message(self, message_id, message, sender)
+	if message_id == hash("proxy_loaded") then
+		msg.post(sender, "init")
+		msg.post(sender, "enable")
+	elseif message_id == hash("load_selection") then
+		print("[recieved] load_selection")
+		msg.post("#start_proxy", "unload")
+		print("[unloaded] start proxy")
+		msg.post("#selection_proxy", "load")
+		
+	end
+end

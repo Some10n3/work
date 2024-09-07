@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Personal Information</title>
+        <link rel="stylesheet" href="resume.css">
+    </head>
+    <body>
+        <div class="float-container">
+            <div class="float-child" style="width: 3%; background-color: rgb(67, 67, 67);">
+            </div>
+            <div class="float-child border-left" style="width: 22%; background-color: rgb(90, 90, 90);">
+                <div style="padding-left: 11%; padding-top: 18%; padding-bottom: 18%;"><img src="image.png" alt="Girl in a jacket" width="140" height="140"></div>
+                <div class="menu-padding" style="background-color: rgb(177, 176, 176); border-left: 3px solid #757575;"><strong>Personal Information</strong></div>
+                <a class="link" href="Experience.html"><span><div class="menu-padding"><strong>Experience</strong></div></span></a>
+                <a class="link" href="Education.html"><span><div class="menu-padding"><strong>Education</strong></div></span></a>
+                <a class="link" href="Achievements.html"><span><div class="menu-padding"><strong>Achievements</strong></div></span></a>
+                <a class="link" href="Interests.html"><span><div class="menu-padding"><strong>Interests</strong></div></span></a>
+
+            </div>
+            <div class="float-child" style="width: 75%; background-color: rgb(170, 139, 200);">
+                <div><strong><h1 style="padding-top: 69px; padding-bottom: 69px;">Chanasorn Howattanakulphong</h1></strong></div>
+                <div style="background-color: rgb(205, 172, 238);">
+                    <table style="padding-bottom: 30px;">
+                        <tr>
+                            <td style="padding-left: 9%; padding-top: 6%;"><strong>Email address</strong></td>
+                            <td style="padding-left: 9%; padding-top: 6%;"><strong>Address</strong></td>
+                        </tr>
+                        <tr class="gray">
+                            <td style="padding-left: 9%; padding-top: 1%;">65011277@kmitl.ac.th</td>
+                            <td style="padding-left: 9%; padding-top: 1%;">The Oleander เดอะ โอเลียนเดอร์ ชั้น 15 ห้อง 44/44 ซ.สุขุมวิท 11 แขวงคลองเตยเหนือ วัฒนา กทม. 10110</td>
+                        </tr>
+                        <tr>
+                            <td style="padding-left: 9%; padding-top: 3%;"><strong>Phone number</strong></td>
+                            <td style="padding-left: 9%; padding-top: 3%;"><strong>Web</strong></td>
+                        </tr>
+                        <tr class="gray">
+                            <td style="padding-left: 9%; padding-top: 1%;">0864185772</td>
+                            <td style="padding-left: 9%; padding-top: 1%;">https://www.oppenheimer.com</td>
+                        </tr>
+                    </table>
+                    <div style="border-top: 1px solid #525252; width: 82%; margin: auto; padding-top: 3%; padding-left: 1%; height: 200px;"><p>     Julius Robert Oppenheimer[note 1] (/ˈɒpənhaɪmər/ OP-ən-hy-mər; April 22, 1904 – February 18, 1967) was an American theoretical physicist and director of the Manhattan Project's Los Alamos Laboratory during World War II. He is often called the "father of the atomic bomb".</p></div>
+                </div>                    
+            </div>
+        </div>
+    </body>
+</html>

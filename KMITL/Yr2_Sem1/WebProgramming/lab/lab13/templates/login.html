@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" 
+      type="image/png" 
+      href="{{ icon_url }}">
+    <meta charset="UTF-8">
+    <title>{{ page_title }}</title>
+    <style>
+        body {
+            background-color: {{ background_color }};
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .login-container {
+            background-color: {{ container_background_color }};
+            border-radius: 20px; 
+            box-shadow: 0px 0px 10px rgba(132, 19, 149, 0.3);
+            padding: 20px;
+            width: 40%;
+            height: 35%;
+            text-align: center;
+        }
+
+        h1 {
+            color: {{ heading_color }};
+            font-size: 60px;
+        }
+
+        h2 {
+            color: {{ heading_color }};
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 80%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 0.5px solid {{ input_border_color }};
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: {{ button_background_color }};
+            color: {{ button_text_color }};
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: {{ button_hover_background_color }}; 
+        }
+    </style>
+    <!-- <script src="{{ js_script }}"></script> -->
+    <script>
+        window.onload = function() {
+            document.getElementById("login").onclick = function() {
+                var username = document.getElementById("username").value;
+                var password = document.getElementById("password").value;
+                var alert = document.getElementById("alert");
+                if (username == "" || password == "") {
+                    alert.innerHTML = "{{ empty_field_alert }}";
+                } else {
+                    document.getElementById("login-form").submit();
+                }
+            }
+        }
+
+    </script>
+</head>
+<body>
+    <div class="login-container">
+        <<form action="{{ action_url }}" method="post" id="login-form">
+    <h1>{{ page_title }}</h1>
+    <p id="alert" style="color: {{ alert_color }};"></p>
+    <input type="text" placeholder="{{ username_placeholder }}" id="username" name="ID">
+    <input type="password" placeholder="{{ password_placeholder }}" id="password" name="Password"><br>
+    <button id="login">{{ login_button_text }}</button>
+</form>
+    </div>
+</body>
+</html>

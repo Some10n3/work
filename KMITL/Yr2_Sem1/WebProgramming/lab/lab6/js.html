@@ -1,0 +1,27 @@
+<!DOCTYPE>
+<html>
+<head>
+    <title>Lab 6</title>
+</head>
+<body>
+    <h1>Welcome to Javascript</h1>
+    <div style="min-height: 400px; min-width: 300px; border: solid 1px black;">
+        <p id="output"></p>
+    </div>
+    <input type="text" id="input">
+    <button onclick="addText()">Add</button>
+    <script>
+        function addText() {
+            const input = document.getElementById("input");
+            const output = document.getElementById("output");
+            const text = input.value;
+
+            const lineBreak = document.createElement("br");
+            const textNode = document.createTextNode(text);
+            output.appendChild(textNode);
+            output.appendChild(lineBreak);
+            input.value = "";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Calendar</title>
+    <!-- <script src="Calendar.js"></script> -->
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            text-align: center;
+            margin: auto;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calendar</h1>
+    <button onclick="createCalendar()">Create Calendar</button><br><br>
+    <div id="calendar"></div>
+    <script>
+
+
+        function createCalendar(){
+
+            // produce calender
+
+            var calendar = document.getElementById("calendar");
+            var table = document.createElement("table");
+            var tr = document.createElement("tr");
+            var th = document.createElement("th");
+            th.innerHTML = "August 2023";
+            th.setAttribute("colspan", "7");
+            tr.appendChild(th);
+            table.appendChild(tr);
+
+            var tr = document.createElement("tr");
+            var th = document.createElement("th");
+            th.innerHTML = "Sun";
+            tr.appendChild(th);
+            var th = document.createElement("th");
+            th.innerHTML = "Mon";
+            tr.appendChild(th);
+            var th = document.createElement("th");
+            th.innerHTML = "Tue";
+            tr.appendChild(th);
+            var th = document.createElement("th");
+            th.innerHTML = "Wed";
+            tr.appendChild(th);
+            var th = document.createElement("th");
+            th.innerHTML = "Thu";
+            tr.appendChild(th);
+            var th = document.createElement("th");
+            th.innerHTML = "Fri";
+            tr.appendChild(th);
+            var th = document.createElement("th");
+            th.innerHTML = "Sat";
+            tr.appendChild(th);
+            table.appendChild(tr);
+
+            var start = 1;
+            var end = 31;
+            var startPoint = 1;
+            var firstBlock = 1;
+
+
+            for (var i = 0; i < 5; i++) {
+                var tr = document.createElement("tr");
+                for (var j = 0; j < 7; j++) {
+                    if (firstBlock != 0) {
+                        var td = document.createElement("td");
+                        td.innerHTML = "";
+                        tr.appendChild(td);
+                        firstBlock--;
+                    }
+                    else{
+                        var td = document.createElement("td");
+                        if (startPoint > end) {
+                            td.innerHTML = "";
+                        } else {
+                            td.innerHTML = startPoint;
+                            startPoint++;
+                        }
+
+                        tr.appendChild(td);
+                    }
+                }
+                table.appendChild(tr);
+                if (startPoint > end) {
+                    break;
+                }
+                if (i == 4) {
+                    var tr = document.createElement("tr");
+                    for (var j = 0; j < 7; j++) {
+                        var td = document.createElement("td");
+                        if (startPoint > end) {
+                            td.innerHTML = "";
+                        } else {
+                            td.innerHTML = startPoint;
+                            startPoint++;
+                        }
+
+                        tr.appendChild(td);
+                    }
+                    table.appendChild(tr);
+                }
+            }
+
+            calendar.appendChild(table);
+        }
+    </script>
+</body>
+</html>

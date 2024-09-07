@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ page_title }}</title>
+    <style>
+        body, html {
+            height: 100%;
+            text-align: center;
+            justify-content: center;
+            margin: auto;
+            max-width: 900px;
+        }
+        table {
+            text-align: center;
+            justify-content: center;
+        }
+        th {
+            border: 1px solid black;
+            padding: 8px;
+        }
+
+        img {
+            width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        .center_top_col{
+            width: 50%;
+            text-align: center;
+        }
+        .left_top_col {
+            width: 35%;
+            text-align: left;
+        }
+        .mid_top_col {
+            width: 15%;
+            text-align: left;
+        }
+        .right_top_col {
+            text-align: left;
+        }
+
+        .content_table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        .content_table td {
+            border: 1px solid black;
+            padding: 8px;
+            border-bottom: none;
+            border-top: none;
+        }
+        .content_table tbody {
+            border-bottom: 1px solid black;
+        }
+    </style>
+    <script src="{{ js_script }}"></script>
+</head>
+<body>
+    <br><br>
+    <h1>{{ transcript_heading }}</h1>
+    <table class="content_table">
+        <thead>
+            <th style="width: 5%;">
+                <p>{{ course_id_label }}</p>
+            </th>
+            <th style="width: 85%;">
+                <p>{{ course_title_label }}</p>
+            </th>
+            <th style="width: 5%;">
+                <p>{{ credit_label }}</p>
+            </th>
+            <th style="width: 5%;">
+                <p>{{ score_label }}</p>
+            </th>
+        </thead>
+        <tbody id="content_body">
+            {% for course in courses %}
+            <tr>
+                <td style="text-align: left;">{{ course.id }}</td>
+                <td>{{ course.title }}</td>
+                <td>{{ course.credit }}</td>
+                <input type="text" id="score_{{ course.id }}" value="{{ course.score }}">
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

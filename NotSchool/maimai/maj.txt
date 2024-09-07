@@ -1,0 +1,144 @@
+การสร้างไฟล์เพลง
+1. สร้าง Folder มา 1 Folder แล้วตั้งชื่ออะไรก็ได้ (แนะนำว่าตั้งเป็นชื่อเพลง จะได้จำได้ว่าใน Folder นี้ชาร์ตเพลงอะไรอยู่)
+2. ข้างในโฟลเดอร์ให้ใส่ไฟล์ต่อไปนี้
+- 3simai.swf: get-started 
+- maidata.txt: คลิกขวาแล้วกด New > Text file > ตั้งชื่อว่า maidata.txt เท่านั้น
+- track.mp3: ไฟล์เพลงที่ใช้ทำชาร์ต ใช้ไฟล์ MP3 เท่านั้น
+- bg.jpg: ปกเพลงขนาด 500*500 ใช้ไฟล์ JPG เท่านั้น (รูปใหญ่กว่าหรือเล็กกว่าก็ได้ แต่ bg มันจะดูแปลกๆหน่อย) 
+maidata.txt
+ใน maidata.txt จะประกอบไปด้วยส่วนประกอบต่อไปนี้
+- &title=ชื่อเพลง
+- &artist=ชื่อศิลปิน
+- &lv_x=เลข Level
+- &des_x=ชื่อ Chart Designer
+- &inote_x=โน้ต
+x คือเลขระดับความยาก โดยเรียงดังนี้
+1: EASY
+2: BASIC
+3: ADVANCED
+4: EXPERT
+5: MASTER
+6: Re:MASTER
+7: ORIGINAL 
+Xenon — 13/04/2022
+การวางโน้ตเบื้องต้น/โน้ต Tap/Ex Tap/โน้ต Break
+- หลัง &inote_x = ให้ใส่ (y) เพื่อกำหนด BPM ของเพลง
+- หลังจากกำหนด BPM แล้ว ใช้ {z} เพื่อกำหนดห้อง
+1 คือโน้ตตัวกลม (Whole Note)
+2 คือโน้ตตัวขาว (Half Note)
+4 คือโน้ตตัวดำ (Quarter Note)
+8 คือโน้ตเขบ็ต 1 ชั้น (Eighth Note)
+16 คือโน้ตเขบ็ต 2 ชั้น (Sixteenth Note)
+and so on
+- ตำแหน่งของปุ่มจะเรียงแบบนาฬิกา โดย 1 คือบนขวาและ 8 คือบนซ้าย
+- ใช้เครื่องหมาย , ในการแบ่งจังหวะ
+- ใส่ตัว b หลังเลขเพื่อกำหนดโน้ต Break
+- ใส่ตัว x หลังเลขเพื่อกำหนด Ex Tap
+- ใช้ตัว E เพื่อเป็นการบอกว่าจบเพลงแล้ว
+[EXAMPLE]
+&inote_5=
+(200)
+{4}
+1,2,3,4x,5,6,7,8b,
+{8}
+1,2,3,4x,5,6,7,8b,
+E
+ 
+Xenon — 13/04/2022
+Both/Each
+ใช้เครื่องหมาย / ในการแบ่งโน้ตคู่ หากเป็นโน้ต Tap ทั้งคู่สามารถเขียนเป็นเลข 2 เลขติดกันได้เลย
+[EXAMPLE]
+{4}
+15,26,37,48,
+1/5,2x/6,3/7b,4b/8b,
+E
+ 
+Xenon — 13/04/2022
+Hold
+ใส่ตัว h แล้วตามด้วย [z:a] หลังเลขเพื่อกำหนด
+- a คือจำนวนห้อง
+[EXAMPLE]
+{2}
+1h[8:3],2h[4:1],3xh[8:1],,,,
+E
+ 
+Xenon — 13/04/2022
+Slide
+เหมือน Hold แต่มีรูปแบบที่ต่างกันไป ซึ่งจะใช้สัญลักษณ์ดังนี้
+ให้ u เป็นจุดเริ่มและ v เป็นจุดสิ้นสุด
+- u-v[z:a] สไลด์ตรง
+- uvv[z:a] สไลด์หักตรงกลางจอ
+- u<v[z:a] สไลด์วนขอบไปทางซ้าย (ไม่ใช่ทวนเข็มนาฬิกา)
+- u>v[z:a] สไลด์วนขอบไปทางขวา (ไม่ใช่ตามเข็มนาฬิกา)
+- u^v[z:a] สไลด์วนขอบโดยใช้ทางที่ใกล้ที่สุด
+- upv[z:a]/uqv[z:a] สไลด์วนรอบกลางจอ
+- uppv[z:a]/uqqv[z:a] สไลด์วนรอบข้างจอ
+- uwv[z:a] Fan Slide; จุด v ต้องเป็นจุดตรงข้าม u เท่านั้น
+- uVvw[z:a] สไลด์ทำมุมที่จุด v และจบที่จุด w; จุด v ต้องห่างจากจุด u 2 หรือ 3 ช่องเท่านั้น
+- ใช้สัญลักษณ์ * ในการแบ่งสไลด์ 2 ตัวที่เริ่มที่จุดเดียวกัน เช่น 1-4[8:1]*-6[8:1]
+[EXAMPLE]
+{2}
+1-4[8:1],2v4[8:1],3<6[8:1],4x>1[8:1],5^8[8:1],6p8[8:1],7qq2[8:1],8bw4[8:1],
+{4}
+1V35[8:1],1,,,,
+E
+ 
+Xenon — 13/04/2022
+Touch
+ใช้รูปด้านล่างในการอธิบาย
+Image
+Xenon — 13/04/2022
+- ปกติในการชาร์ตจะไม่ใช้โซน A และ D
+- Touch Hold สามารถทำได้แค่ที่โซน C โดยใช้สัญลักษณ์ Ch[z:a]
+- Effect พลุ สามารถทำได้แค่ในโซน C โดยใช้สัญลักษณ์ f
+[EXAMPLE]
+{8}
+E1,E2,E3,E4,E5,E6,E7,E8,
+{4}
+B1/B2,B3/B4,B5/B6/B7,B1f/B6/B7/B8f,
+{2}
+C,Cfh[4:1],,,,
+E
+ 
+Xenon — 18/04/2022
+Extras
+- ใช้สัญลักษณ์ || เพื่อ comment (Shift + \)
+[EXAMPLE]
+{24}
+1,2,3,4,5,6,7,8,1,2,3,4,5,6,7,8,
+|| Spin Note
+ 
+Xenon — Today at 01:45
+FESTiVAL Elements
+- Slide ต่อเนื่อง ให้เขียนต่อกันได้เลย
+[EXAMPLE]
+1-4-7[2:1]
+|| Chain Slide
+ 
+- Break Hold ให้เรียง Pattern ดังนี้ h -> x -> b
+[EXAMPLE]
+{1}
+1hb[2:1],1hxb[2:1]
+- Break Slide ให้เรียง Pattern ดังนี้ timing1 -> pattern -> timing2 -> b
+[EXAMPLE]
+1-5b[8:1]
+
+
+Required Resources
+3simai
+Basic charting tool
+Latest version: 3.04
+https://ux.getuploader.com/simai/
+
+Adobe Shockwave Player
+Discountinued, but you can still use GOM or VLC
+
+Recommended Resources
+majdata
+Recommended charting tool, easy to use and real time feed. 3simai is required to use majdata
+Latest version: Beta 3.0
+https://github.com/LingFeng-bbben/MajdataView
+
+Visual Studio Code
+A cleaner workspace than notepad
+https://code.visualstudio.com/ 
