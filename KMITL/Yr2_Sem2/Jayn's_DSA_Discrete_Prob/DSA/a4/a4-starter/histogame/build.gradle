@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+sourceCompatibility = 1.11 
+
+application {
+	mainClass.set('game.TextTwist')
+}
+
+run {
+ standardInput = System.in
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+  testImplementation(platform('org.junit:junit-bom:5.9.3'))
+	testImplementation('org.junit.jupiter:junit-jupiter')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+    }
+}
