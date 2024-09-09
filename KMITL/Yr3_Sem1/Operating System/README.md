@@ -249,7 +249,7 @@ int main(int argc, char **argv)
 - shmat() 
     - shared mem attatch
     - use to links shared mem to existing storage space
-- shmad() 
+- shmdt() 
     - shared mem detatch
     - use to detatch shared mem to existing storage space
 - shmctl() shared mem control

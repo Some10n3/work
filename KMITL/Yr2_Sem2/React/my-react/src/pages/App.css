@@ -1,0 +1,84 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  min-height: max-content;
+}
+
+body {
+  overflow: hidden;
+  min-height: fit-content;
+  background-color:rgb(149, 117, 205);
+  /* #5e35b1; */
+  font-family: 'Nunito', sans-serif;
+  /* font color */
+  @apply text-font-main
+}
+
+.mainDIV::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide scrollbar for IE, Edge and Firefox */
+.mainDIV {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.nav {
+  @apply text-slate-700 dark:text-slate-300
+  hover:text-slate-900 text-2xl font-semibold;
+}
+
+.darkBG {
+  @apply dark:bg-slate-900 dark:text-slate-400;
+}
+
+.darkBG_children_container {
+  @apply dark:bg-slate-700 dark:text-slate-400;
+}
+
+img {
+  z-index: 0;
+}
+
+.vh {
+  height: 100vh;
+  width: 100vw;
+}
+
+#root { 
+  height: 100%; 
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.logo {
+  /* animation: logo-spin infinite 20s linear; */
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.logo-text {
+  font-size: 32px;
+} 
+
+.logo:hover {
+  filter: drop-shadow(0 0 2em #515affaa);
+  /* animation: logo-spin infinite 1s linear; */
+}
+
+
+
+/* /* @keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} */
