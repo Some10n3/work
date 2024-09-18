@@ -691,3 +691,176 @@ Conflict serializable vs View serializable
 2. Compatibility matrix
 
 Discuss lock protocol after midterm
+
+# => forgot to pull from pc
+
+locking alone (x lock and s lock) without lock protocol does not help with 4 concurrency control problems
+
+> Deadlock : The system is deadlocked if there's a set of Tx that every Tx in the set is waiting for other Tx
+
+## Deadlock Prevention
+- Protocols to ensure that the system will never enter the deadlock state
+
+### 2 approaches :
+### **wait-die** scheme
+- non preemtive : A process will not release result before it terminate
+- older Tx may wait for younger one to release data item
+- younger Tx never waits for older one, they are rolled back instead
+
+```
+Tx8 has the resource
+      wait          die
+Tx7    ->    Tx8    <-    Tx9
+```
+
+### **wound-wait** scheme
+- preemtive : A process may release result before it terminate
+- older Tx wounds(force younger Tx to roll back)
+- younger Tx waits for older one
+
+```
+Tx8 has the resource
+      wound          wait
+Tx7    ->    Tx8    <-    Tx9
+```
+
+There will be a lot of rollback so people use deadlock detection
+
+## Deadlock Detection
+- If Tx wait for too long, ask the DBMS to check in the wait for graph if there's a cyclic dependency causing a deadlock somewhere.
+- If deadlock, terminate one of the Tx and make them restart
+- Could set a timeout to terminate the Tx
+- More popular nowadays
+- Normally deadlock are checked on request (by DBA) because the system can't check all the wait for graph. System explode
+
+## Time stamp based concurrency control
+- If you don't lock, you don't get deadlock
+- Instead of locking, use this instead
+- Start of each Tx, Ti is issued a timestamp Ts(Ti)
+- Each Tx has a unique timestamp
+- 
+
+```
+Ts(Ti), Ts(Tj) = Timestamp of Tx Ti and Tj
+
+If Ti is older than Tj
+Ts(Ti) < Ts(Tj)
+```
+
+## Timestamp ordering (TSO)
+- Garuntees conflict serializable without logging
+  
+> Q is each data item
+### W-Timestamp(Q)
+- Timestamp of the youngest Tx that executed write(Q) successfully
+
+### R-Timestamp(Q)
+- Timestamp of the youngest Tx that executed read(Q) successfully
+
+### Ti can read Q if TS(Ti) younger than WTS(Q)
+```
+Ti wants to read Q
+check TS of Ti with WTS of Q
+1. If TS(Ti) < WTS(Q), means the one who wrote Q is younger than Ti. Ti needs to read the value of Q that is already overwritten, so Ti can't read and has to rollback
+2. If TS(Ti) >= WTS(Q) Someone older wrote Q(Or Ti written itself if =), can read
+
+RTS(Q) = max(RTS(Q), TS(Ti)) : If TS(Ti) younger than the old RTS, set it to the new RTS(Q)
+```
+### Ti can
+```
+Ti wants to write Q
+check TS of Ti with WTS of Q
+1. If TS(Ti) < RTS(Q), write too late, the younger should read from what Ti write. The younger ones already read the incorrect value, has to rollback (Value of Q that Ti is producing was needed previously, the system assumed that the value will never be produced, so Ti is rejected and gets rolled back)
+2. If TS(Ti) < WTS(Q) Ti trying to write to an obsolete(Out of date) value of Q, so it gets rejected and rolled back 
+3. Otherwise, the write is executed, WTS(Q) = TS(Ti)
+```
+
+- This technique also solves phantom phenomenon and inconsistent analysis
+- TS protocol does not handle uncommitted dependency problem, needs to handle separately
+![](./pics/TS_dep.jpg)
+![](./pics/TS_EX.jpg)
+***A gets rolledback**
+## How to prevent A getting rolledback?
+## Multiversion Scheme
+![](./pics/TS_EX2.jpg)
+- Write a new version of ACC3 in TXB and keep both version
+- Read the correct version (The youngest version which is still older than TI)
+- If B insert ACC4, A will not see ACC4
+
+#### How far back should we keep the old version???
+- We have r-1, r0, r1 .... rn. We can't keep all
+- If Ti is the oldest Tx that WTS(r-n) ... WTS(r0) < Ti, delete r-n ... r-1
+- Ti reads r0, delete all before r0 because Ti reads from r0
+- Only keep the youngest one among the data items
+
+## What if the DB buffer is full and can't keep r0 while rn is already made?
+> r0 ... rn is kept in DB buffer
+
+![](./pics/TS_EX3.jpg)
+- Implement `BIJ` as part of DB space, so deleted r0 could be fetched back in case Ti wants to read it.
+
+> Oracle calls DB space, Table space
+> Oracle calls the BIJ space as undo table space
+
+- Size of undo table space is significant, should be big enough
+
+## What if the data item is so old that it gets deleted from both main mem(DB buffer) and the undo table space???
+- Ti gets rolled back
+> Oracle error says "Serializability can't be achieved"
+
+## Summary
+- TS protocol can avoid rollbacks in the case of inconsistency analysis and phantom phenomenon by using multiversion scheme
+- Multiversion scheme : Write a new version, don't delete the old one. The Tx read the correct version. If the correct version can't be found, even in undo table, rollback the Tx.
+
+## Timestamp protocol still can't handle uncommitted dependency problem
+- TS protocol assumes that everyone commits
+
+![](./pics/TS_dep.jpg)
+- B comes before A, b update R. A tries to read R
+- A can read R because B is older than A and allowed by protocol
+- A reads uncommitted value (B might rollback and cause incorrect result)
+
+## Introducing a commit bit
+- There's a commit bit for each Tx
+- Check the commit bit before reading
+- If the commit bit says it is committed, the reader can read
+- `"The reader reads only values written by a committed Tx"`
+- A bit overhead for the correct result (Storing each bit and checking each Tx)
+
+## Another solution to solve this problem
+- Using locks
+- x lock the uncommitted value and unlock it at the syncpoints
+- Won't lead to a deadlock because with the TS protocol, only the younger reads the older ones.
+
+![](./pics/TS_Xlock.jpg)
+- Loss update problem even with the multiversion scheme
+- A gets rolledback because RTS(r) is now Tb when it fetched
+
+## To avoid rollbacks
+- Some DBMS deploy 2 phase logging
+- Don't get a deadlock, get a wait
+
+# Concurrency Control techniques
+1.) Strict (Rigorous) 2 phase logging with multiple granularity (+ intention locking)
+- Deadlock
+- `DB2`, `MS SQL Server`, `MySQL` uses these
+
+2.) Timestamp ordering protocol + multiversion scheme + commit bits
+- No locking but rollback
+- Only Specialized DBMS
+- `Garn faifa` use it to avoid deadlocks
+
+## The 3rd hybrid technique :
+
+3.) Strict(Rigorous) 2 phase locking + multiversion scheme
+- Problem 1, 2 are solved by 2 phase locking
+- Problem 3, 4 are solved by multiversion scheme
+- `Oracle`, `PostgreSQL`, etc. uses these
+
+
+# Assignment 20%
+- Study concurrency control used by a relational DB DBMS and one used by a non-relational DB DBMS
+- Report will be submitted after the final Exam
+- 2 Person Report
+
+### Next week will be querying and optimization

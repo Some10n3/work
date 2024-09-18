@@ -1,13 +1,18 @@
-drawTree(S, L) :- drawTree(S, L, 0).
+% Base case: A tree of size 0 has no steps
+drawTree(0, []).
 
-drawTree(S, L, I) :- I =< L, I1 is I + 1, drawTree(S, L, I1), drawLine(S, I).
+% Recursive case: Generate drawing steps for a tree of size S
+drawTree(S, [lt(90), fd(S) | RestSteps]) :-
+    S > 0,
+    S1 is S * 0.7,  % Reduce the size for the next level
+    drawBranch(S1, RestSteps).
 
-drawTree(S, L, I) :- I =< L, I1 is I + 1, drawTree(S, L, I1).
+% Helper predicate to draw branches and recursive calls
+drawBranch(0, []) :- !.
 
-drawLine(S, I) :- drawLine(S, I, 0).
-
-drawLine(S, I, J) :- J < I, J1 is J + 1, write(S), drawLine(S, I, J1).
-
-drawLine(S, I, J) :- J =:= I, write('\n').
-
-% ?- drawTree('*', 5).
+drawBranch(S, [lt(30), fd(S), lt(30) | RestSteps]) :-
+    S > 0,
+    S1 is S * 0.7,  % Reduce the size for the next level
+    drawBranch(S1, Steps1),
+    append(Steps1, [rt(60), fd(S1), lt(30), backward(S1), lt(30) | Steps2], RestSteps),
+    drawBranch(S1, Steps2), !.
