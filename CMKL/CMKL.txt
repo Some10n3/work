@@ -1,3 +1,1 @@
 cap 36 core 48 elec unknown  all 108
-
-next sem visualize and sti or some shit
