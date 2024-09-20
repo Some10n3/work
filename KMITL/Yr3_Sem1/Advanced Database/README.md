@@ -864,3 +864,129 @@ check TS of Ti with WTS of Q
 - 2 Person Report
 
 ### Next week will be querying and optimization
+
+# Query Processing
+
+![alt](./pics/quary_processing.png)
+
+- Query the SQL
+- Parser check the syntax of those words
+- Translate SQL to relational Algebra
+- Then `Optimizer` tries to find the best realtional algebra expression (choose the best plan)
+- Optimizer has to consult DB statistic (cost based optimization from last year)
+- Evaluation engine follows execution plan
+- **Performance issues is at the query optimizer level**
+
+![alt](./pics/relational_cal_alg.jpg)
+
+## Basic steps in Query Processing
+1. Parsing and translation
+2. Optimization
+3. Evaluation
+   
+![alt](./pics/RA_EX.jpg)
+
+```
+Ex1 from pic = this SQL:
+select Salary
+from instructor
+where Salary < 75000
+```
+**Which one should be better in term of speed and performance the select one or the project one?**
+- select first then project or project first then select
+- select first better
+- physical reason why it's faster, because physical structure of the database
+- most DBMS keeps data by rows not by column
+- each DB log reads by rows, doesn't have to read the entire DB
+- Only read the ones that has salary more than 75000
+- **DB for data analytics(special DB) keep data by column**
+
+## Relational Algebra
+- 8 operators
+- Essential RA operators : select project and join
+- Set operators : union, intersection, difference
+
+![alt](./pics/RA_Operations.jpg)
+
+- `select(restrict)`
+  - different select than RelationalDB's select, this one is an operator
+  - select tuples that satisfy given predicate
+  - ![alt](./pics/select.jpg)
+  - `select instructor where department name is physics`
+- `Project`
+  - Unary operation (only one operand (r))
+  - ![alt](./pics/project1.jpg)
+  - ![alt](./pics/project2.jpg)
+  - `Project a1, a2, a3 from r where r is relation name
+- `Join`
+  - Natural join, inner join not the same
+  - (RA join is equals to natural join) Matches equal value of common attributes. The common attributes appear only once at the output
+  - 
+    - ![alt](./pics/RA_join.jpg)
+  - normal join (theta join)
+    - Can change theta condition(join condition)
+    > - check this out pls I didn't listen
+- `Union`
+  - r u s
+  - In principle, you can union 2 relations (r U s) only when the relations are based on same schema (Relational Algebra)(they should have same structure), otherwise you can't union them.
+  ```
+  select .....
+  union  .....
+  select .....
+  The 2 select results must be union compatible
+  ```
+  - Ex. char and warchar has same data length, union compatible
+- `Intersection`
+  - r ^ s
+- `Difference(minus)`
+  - r - s
+  - SQL also has minus select but doesn't need to be union compatible
+  ```
+  select .....
+  minus  .....
+  select .....
+  ```
+- `Multiply(cartesian product)`
+- `Divide`
+
+## Divide is special, discuss next week
+
+### Composition of RA (using them together)
+![alt](./pics/compose_RA.jpg)
+```
+Equivalent SQL :
+select name
+from instructor
+where departName = 'Physics'
+```
+
+### Example exercise problem
+![alt](./pics/RA_EX2.jpg)
+![alt](./pics/RA_EX2_ans.jpg)
+- This is linear format
+- Solution 2 better, because it selects the rows before joining them
+- Imagine having to join big af rows, bad
+
+### Basic principle for query optimizer : 
+- Perform unary operators first to resuce number of rows binary operators has to parse
+  - 30 years ago, 
+- select + project, do select first
+
+### Non linear format for RA (Execution plan)
+![alt](./pics/executionn_plan1.jpg)
+- full table scan at I3 and I4
+- plan 2 better
+- read from bottom to top
+
+![alt](./pics/quary_processing.png)
+> Then `Optimizer` tries to find the best realtional algebra expression (choose the best plan)
+
+![alt](./pics/executionn_plan2.jpg)
+- In the example, we only have a few rows and not hundreds of rows.
+- The DBMS optimizer may choose to join I3 to sp directly to not mess the rows up
+- In this case, number 3 is better than number 4
+- **How we write SQL does not matter, the optimizer will choose for you anyway**
+
+![alt](./pics/RA_EX3.jpg)
+- subquery version of the SQL code to match the tree
+
