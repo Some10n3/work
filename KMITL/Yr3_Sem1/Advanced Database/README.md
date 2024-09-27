@@ -990,3 +990,105 @@ where departName = 'Physics'
 ![alt](./pics/RA_EX3.jpg)
 - subquery version of the SQL code to match the tree
 
+## Divide operator
+  - The divident(r) is a binary relation
+  - The divisor(s) is a unary relation(Only one attribute)
+  - the result is a unary relation whose attribute is not the attribute of the divisor and has all the matched values from the divisor
+![alt](./pics/RA_divide.jpg)
+
+## Relational Complete Language
+- Must be able to query this
+![alt](./pics/RA_complete.jpg)
+
+# Selection Operation
+- File scan
+  - Algorithm A1
+    - A1(linear search)
+      - when table has no index on search key(search column)
+      - Cost estimate = br + 1 seek
+        - br is block transfer
+        - seek is a hard disk term
+      - If selection on a key attribute, cost = br/2 + 1 seek
+      - Can't binary search because data is not stored consecutively
+      - If data is physically clustered, can binary search
+        - Binary search cost estimate = upperBound(log2(br)*(tt + ts))
+        - tt is transfer time
+        - ts is seek time
+- Index scan
+  - Selection using indices
+  - Algorithm A2, A3, A4, A5
+    - A2(Clustering index, equality on key)
+    - Retrieve a single record(1 row)
+      - Clustering index means Tables are sorted physically
+      - Search index first(from the index list on the left) then get pointer to the table
+        - ![alt text](pics/A2.jpg)
+      - equility on key : search and find only one tuple on row return
+      - Cost estimate = (hi + 1) * (tt + ts)
+        - hi is index height
+
+    - A3(Clustering index, equality on non key)
+      - Retrieve a multiple record(many rows)
+      - records are on consecutive blocks (clustered)
+      - Cost estimate = hi * (tt + ts) + tt + ts * b
+      - b = number of blocks containing matching records
+      - ![alt text](pics/A3.jpg)
+
+    - A4(Secondary index, equality on key)
+      - Retrieve a single record(1 row)
+      - Cost estimate = (hi + n) * (tt + ts)
+      - n is number of matching records not block
+      - more expensive than full table scan because no cluster
+      - the records are not consecutive
+      - most of real life table are not clustered
+        - because if update, one guy move from london to athen. have to move data from london to athen block. slow
+        - just query the data faster so ppl do that
+        - also when insert if overflow the block. DBMS will have to create another block for it and moving the block physically to this block will have bad performance
+      - ![alt text](pics/einstein_case_A4.jpg)
+      - Use A4 because data is sorted by id number not id name and onlt 1 row(einstein only has one row)
+      - Cost of finding einstein row
+      - 3 nodes from index (3 until meet einstein)+ 1 node from the data each noed require seek time and transfer time
+
+    - A5(Clustering index, comparision)
+
+    - A6(Secondary index, comparision)
+- (more til A10, will screenshot later)
+
+> Primary index(Clustering index) and Secondary index have nothing to do with primary, candidate key. 
+> Rows have no order 'logically' But physically, they are sorted
+
+### Search key
+- attribute to set of attributes used to look up records in file
+> Key is an dentifier, but a search key may not be an identifier not the same as key
+
+## Primary Index
+- Both index and dataset are sorted according to the same column(attribute)
+![](./pics/primary_index.jpg)
+- This is a primary index
+- The arrows don't cross(Sorted according to the same column)
+
+## Cluster (in physical DB)
+- Logically adjacent rows are kept adjacent physically (in the same DB block or adjacent DB)
+
+![alt text](./pics/Cluster.jpg)
+- pic1
+  - Supplier table clustered by city
+  - Save space by saving city name only once
+  - hard to query
+- pic2
+  - multitable cluster
+  - If you cluster by table already, can't cluster again
+  
+> Can we have more than one cluster (cluster by city and by )? Yes but bad performance due to having to update both physical places
+
+![alt text](pics/ordered_indices.jpg)
+
+#### In postgres
+- create structure : get structure with primary index
+- create index : get structure with secondary index
+
+## B+ tree
+- If there are K search key values in the file, the tree height is no more than upperbound(log upperbound(n/2)(k))
+- Can find n(height to reach the node we are searching for) from k(size of search key)
+- ![alt text](pics/BPlusTree1.jpg)
+- ![alt text](pics/BPlusTree2.jpg)
+- 1 node is 1 DB block

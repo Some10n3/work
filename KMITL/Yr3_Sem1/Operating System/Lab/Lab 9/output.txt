@@ -1,0 +1,118 @@
+Producer entered: 0 Buffer size = 1
+Consumer consumed: 0 Buffer size = 0
+Consumer: Buffer Empty
+Producer entered: 1 Buffer size = 1
+Consumer consumed: 1 Buffer size = 0
+Consumer: Buffer Empty
+Producer entered: 2 Buffer size = 1
+Producer entered: 3 Buffer size = 2
+Consumer consumed: 2 Buffer size = 1
+Producer entered: 4 Buffer size = 2
+Producer entered: 5 Buffer size = 3
+Consumer consumed: 3 Buffer size = 2
+Producer entered: 6 Buffer size = 3
+Producer entered: 7 Buffer size = 4
+Consumer consumed: 4 Buffer size = 3
+Producer entered: 8 Buffer size = 4
+Producer entered: 9 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 5 Buffer size = 4
+Producer entered: 10 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 6 Buffer size = 4
+Producer entered: 11 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 7 Buffer size = 4
+Producer entered: 12 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 8 Buffer size = 4
+Producer entered: 13 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 9 Buffer size = 4
+Producer entered: 14 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 10 Buffer size = 4
+Producer entered: 15 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 11 Buffer size = 4
+Producer entered: 16 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 12 Buffer size = 4
+Producer entered: 17 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 13 Buffer size = 4
+Producer entered: 18 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 14 Buffer size = 4
+Producer entered: 19 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 15 Buffer size = 4
+Producer entered: 20 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 16 Buffer size = 4
+Producer entered: 21 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 17 Buffer size = 4
+Producer entered: 22 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 18 Buffer size = 4
+Producer entered: 23 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 19 Buffer size = 4
+Producer entered: 24 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 20 Buffer size = 4
+Producer entered: 25 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 21 Buffer size = 4
+Producer entered: 26 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 22 Buffer size = 4
+Producer entered: 27 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 23 Buffer size = 4
+Producer entered: 28 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 24 Buffer size = 4
+Producer entered: 29 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 25 Buffer size = 4
+Producer entered: 30 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 26 Buffer size = 4
+Producer entered: 31 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 27 Buffer size = 4
+Producer entered: 32 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 28 Buffer size = 4
+Producer entered: 33 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 29 Buffer size = 4
+Producer entered: 34 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 30 Buffer size = 4
+Producer entered: 35 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 31 Buffer size = 4
+Producer entered: 36 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 32 Buffer size = 4
+Producer entered: 37 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 33 Buffer size = 4
+Producer entered: 38 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 34 Buffer size = 4
+Producer entered: 39 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 35 Buffer size = 4
+Producer entered: 40 Buffer size = 5
+Producer: Buffer Full
+Consumer consumed: 36 Buffer size = 4
+Consumer consumed: 37 Buffer size = 3
+Consumer consumed: 38 Buffer size = 2
+Consumer consumed: 39 Buffer size = 1
+Consumer consumed: 40 Buffer size = 0
+Consumer: Buffer Empty
+All threads completed. Program finished.
