@@ -1066,8 +1066,29 @@ where departName = 'Physics'
 - This is a primary index
 - The arrows don't cross(Sorted according to the same column)
 
+## Secondary Index
+- non clustered index
+- rows of the tables are not sorted (physically)
+- In KMITL and most workplace, all indices are secondary.
+  - They don't cluster the table
+- Query slow
+- Solution is to reorganize (cluster) the physical data
+- Not easy job
+
+# Physical datablase table organization
+- keep tree space for each block, when a new row that should be in the block is inserted, will go to the tree space
+- If tree space full, make a reference to an overflow block
+  - overflow lock everywhere, bad perfremance
+  - export db block
+  - change file type
+  - reorganize it (clear tree space)
+  - change back and import back
+  
+
 ## Cluster (in physical DB)
 - Logically adjacent rows are kept adjacent physically (in the same DB block or adjacent DB)
+- Clustered or sorted physically
+
 
 ![alt text](./pics/Cluster.jpg)
 - pic1
