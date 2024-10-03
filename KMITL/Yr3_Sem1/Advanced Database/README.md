@@ -1032,6 +1032,8 @@ where departName = 'Physics'
     - Cost estimate = hi * (tt + ts) + tt + ts * b
     - b = number of blocks containing matching records
     - ![alt text](pics/A3.jpg)
+    - ![alt text](pics/A3_EX.jpg)
+    - ![alt text](pics/A3_EX_2.jpg)
 
   - A4(Secondary index, equality on key)
     - Retrieve a single record(1 row)
@@ -1044,13 +1046,20 @@ where departName = 'Physics'
       - just query the data faster so ppl do that
       - also when insert if overflow the block. DBMS will have to create another block for it and moving the block physically to this block will have bad performance
     - ![alt text](pics/einstein_case_A4.jpg)
-    - Use A4 because data is sorted by id number not id name and onlt 1 row(einstein only has one row)
+    - Use A4(secondary index) because data is sorted by id number not id name and onlt 1 row(einstein only has one row)
     - Cost of finding einstein row
     - 3 nodes from index (3 until meet einstein)+ 1 node from the data each noed require seek time and transfer time
 
   - A5(Clustering index, comparision)
+  - ![alt](./pics/A5_EX.jpg)
 
   - A6(Secondary index, comparision)
+
+  - A10
+    - Employ search index city
+    - Employ search index status
+    - union them
+    - without the index from status, you need full table scan
 - (more til A10, will screenshot later)
 
 > Primary index(Clustering index) and Secondary index have nothing to do with primary, candidate key. 
@@ -1084,6 +1093,7 @@ where departName = 'Physics'
   - reorganize it (clear tree space)
   - change back and import back
   
+![alt](./pics/Physical_DB_Organization.jpg)
 
 ## Cluster (in physical DB)
 - Logically adjacent rows are kept adjacent physically (in the same DB block or adjacent DB)
@@ -1113,3 +1123,31 @@ where departName = 'Physics'
 - ![alt text](pics/BPlusTree1.jpg)
 - ![alt text](pics/BPlusTree2.jpg)
 - 1 node is 1 DB block
+
+## Nested loop join
+
+
+## Does choice of outer and inner loop matter?
+![alt](./pics/Inner_or_Outer.jpg)
+![alt](./pics/Inner_or_Outer2.jpg)
+- yes
+- the whole  r can be on the main mem at the same time unlike s, which is large.
+- the smaller table that can fit inside the main mem at all time is faster so needs to be inside
+
+## Block nested loop join
+![alt](./pics/Block_Nested_Loop_Join.jpg)
+![alt](./pics/Block_Nested_Loop_Join_EX.jpg)
+- Bigger or smaller on outer loop?
+  - If s outer, total = bs + (br * bs) blocks
+  - If r outer, total = br + (br * bs) blocks
+  - second part is constant, so it depends on first one
+  - So in this algorithm, the smaller one should be on the outer loop
+  - Old programmers without rule based optimizer has to know the table size and choose themselves
+
+## Indexed nested loop join
+
+### Database Table Physical Limit
+![alt text](./pics/Database_Table_Physical_Limit.jpg)
+![alt text](./pics/Database_Table_Physical_Limit_SQL.jpg)
+
+> when sql recommend join, they show plan not run yet
