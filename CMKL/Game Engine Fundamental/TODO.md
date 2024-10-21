@@ -257,3 +257,179 @@ Content
 - For supporting multiple languages
 - Miscellaneous -> String 
 - Create variable text
+
+
+# GPU code (shader code)
+- Glsl
+- directx 12 -> Unreal
+- vulcan -> unreal can use
+- opengv
+
+## What made up Material?
+- texture 
+- uv
+- coordination
+- etc.
+
+# Materials
+
+## Surface
+- Most used in game engine
+- Many kinds
+- may or may not collect light, calculate shadow, normal(calculate where light hit surface)
+
+### Surface blend mode
+- Opaque : solid material with no transparency
+- Masked : allow parts of material to be masked out
+- Translucent : Allow light to pass through. For water, glass
+- Additive : Purely add color to material
+- Modulus : Like Additive but subtract
+
+## Surface Material Shading model
+- Lit
+    - For realistic material
+    - calculate light   
+- Unlit
+    - When lighting is not required
+
+## Decal
+- Project material on lit material. 
+- Like a sticker
+- Ex. Graffiti, bullet holes, blood splatter
+- Also have Lit / Unlit
+- Has to be Translucent, Modulate and Alpha Composite
+- Circle shadow under ur feet in old games
+
+## Light Function
+- Modifies behavior of light
+- Real life light fn. like, where light hit for specific light pattern
+
+## Post Process Material
+- Full screen effects
+- Ex. Distortion, Filters
+- How entire screen is rendered after all objects are drawn
+- Unlit shading model, they don't interact with light
+
+## Volume Material
+- Cloud, Fog Smoke
+- Area effects that fill a 3D space
+
+## User Interface Material
+- UI / Widgets 
+- Material for 2D elements in UI like button or texts or images
+- unlit, they don't require light or shading
+- Use with Widget BP
+
+### Widget BP
+- UE designed to apply use with HUD actor
+- Can also put in player controller
+
+# Material Instance
+- Inherit from Material for less memory usage
+- Same code in all material
+- Code run in material, Material instance just inherit loaded Material
+- Share same shader code
+
+> Zoom in material to not have whitespaces in the material to avoid  bad performance(rendering whitespacce eat resources)
+
+# Material Functions
+- Reuse function to use in another material
+- reuse node-base graphs(blueprints)
+
+# Textures
+- Albedo(color)
+    - The base color / Texture
+- PBR(Physical Base Material)
+    - Metallic, Specular, Roughness
+    - R maybe Metallic, Specular, Roughness
+    - Have to check what artist use for each channel
+- normal
+    - ความนูน
+    - Use RGB channel
+
+# Mesh
+- 3D Geometry
+- Model
+- Shape and Appearance of an object
+- Composed of :
+    - `Vertex` - many vertices = edge
+        - Every corners of a polygon
+        - Map to UVs coordinates
+        - **Number of vertices affect performance**
+    - `Edge` - many edges = face
+        - Line Segment
+        - **Edge Loops**
+            - connect edges in a loop for skeleton
+            - Bad edge loop = might onfluence mesh's deformation when moving ankles during animation
+        - **Edge Flow**
+            - Way the edges flow
+            - Don't need to know if not make assets
+    - `Face` - many faces = polygon
+        - Most faces are triangles, unreal like triangle
+        - Game side use triangle, while animation side uses rectangles
+        - Unreal don't like quad-based modelling(rectangle), might display wrong faces
+        - Consider `Polygon count`, more triangles(polygon) = worse performance
+
+## UVs
+- Two coordinates used to map 2D textures to 3D models
+- U - Horizontal
+- V - Vertical
+- Texture coordination
+
+## Static Mesh
+- No skeleton or bone
+- No deformation
+- Non animated object
+
+## Instanced Static Mesh
+- If we have many static mesh actor, lots of memory needed
+- This help having multiple copies(instances) of the same static mesh
+- Instead of drawing individually, the engine batches them into a single draw call
+- Reduce CPU, GPU overhead
+- Moving grasses are Instanced static mesh.
+    - They just use shader to change the offset of the grass
+    - no deformation
+
+## Skeletal Mesh
+- 3D models that have skeleton rig that allows the object to deform and animate
+- Bones and joints
+- Stretchable tables use joints
+
+### Rigging
+- Moving the bones
+
+### Animation
+- Animate the model using bones and joints
+- UE combines keyframe animation, Animation BP, IK, physics to create smooth, responsive, lifelike animation
+
+### Animation BP
+- Controlling or managing a character's animation
+- Calculate animation
+- Can have many states
+    - Ex. idle state, walking state
+- Process data and save to character then character reads it and Move
+- Ex. Velocity 0 = no move = state idle
+
+## Key Components in Animation BP 
+### Animation graph
+### Event Graph 
+### State machine
+### Transition
+- ![alt text](Notes_images/Transition.png)
+- ![alt text](Notes_images/isDead.png)
+### Blend Space
+- ![alt text](Notes_images/BlendSpace.png)
+- Blend animations together so it doesn't snap
+- ![alt text](Notes_images/BlendSpace2.png)
+- `Blend Spaces are assets that allow multiple animations or poses to be blended by plotting them onto either a one or two-dimensional graph.`
+- Y axis is forward animation, more y = walk fast
+- X axis left / right direction
+
+### Inverse Kinematic (IK)
+- Play animation in only some part, while the other parts are still doing their animation
+- Ex. walking by hitting, legs still walk, hands hit
+
+### Root Motion
+- Root bone position at the ground
+- When moving, move this bone to move the whole mesh
+- Root is at the animation. When moving, will not snap back
