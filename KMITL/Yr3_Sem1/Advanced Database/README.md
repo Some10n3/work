@@ -1151,3 +1151,242 @@ where departName = 'Physics'
 ![alt text](./pics/Database_Table_Physical_Limit_SQL.jpg)
 
 > when sql recommend join, they show plan not run yet
+
+
+# Distributed Database System
+- wants to connect DB together on several machines
+1. Each site(node) must be an autonomous computer
+  - Autonomous : If one (computer, DB or DBMS) is disconnected, the rest can still operate
+2. The sites are interconnected via computer networks
+3. There are local applications that use the resources from only their local site
+  - If you disconnect the computer network, the apps that is running in each machine won't fail
+4. There are global applications that use resources from other sites
+
+> 1 and 2 is a should have on every DB system
+> 3 is definition of Distributed DB system (number of local apps determine Distributed DB system)
+> 4 is definition of Centralized DB system (number of global apps determine Centralized DB system)
+
+> 1-3 Distributed data processing system
+
+![alt text](pics/Distributed_DB.png)
+
+```
+100% local application.
+Bank of asia
+ur account is made at ladkrabang
+when withdrawing money at chiangmai
+They send request to ladkrabang branch, 
+deduct money locally at ladkrabang system
+Then return response to chiangmai branch
+So they could give you money physically
+```
+
+> Use case of distributed DB irl is when two company merges.
+
+## Homogeneous Distributed DB
+- All sites have identical schema / software
+  - Everywhere should have same release and same version
+  - OG definition : All sites use the same DB models
+- All sites are aware of each other and agree to cooperate in processing user request
+- Each site surrenders part of its autonomy in term of right to change schemas or software
+  - lets other sites change database rows
+
+## Heterogeneous Distributed DB
+- Different sites may use different schema / software
+  - OG definition : Different sites may use different DB models
+- Sites may not be aware of each other and may provide only limited facilities for cooperation in transaction procesing
+
+> Hard to connect if each has different DB models
+
+> non relational DB people : Relational DB is not good for data distribution
+> Not fax, we using for a long time
+
+> Mongo DB not relational
+
+## Distributed Data Storage
+- Assume relational data models
+1. Replication
+  - System maintains multiple copies of data, stored in different sites, for faster retrieval and fault tolerence\
+  - Good for read(local read)
+  - multiple sites update, insert, delete
+    - May need 2 phase commit for local / global commits
+    - Eventual consistency
+      - Update each site individually, eventually each site will update to have same data
+
+2. Fragmentation
+  - Relation is partitioned into several fragments stored in distinct sites
+  - ex. fragment tables into bangkok customer, northern customer, southern customer. Based on same schema. When process, process each separately.
+
+3. combined
+  - relation partitioned into several fragments. System maintains several identical replicas of each fragments
+
+### Data Replication
+- A relation or fragment of a relation 
+
+- Advantage of Replication
+  - Availability - one iste is down, can use other sites
+  - Paralelism - quaries on r may be processed by several nodes in pararell
+  - Reduced data transfer - relation r is available locally at each site containing a replica of relation r
+- Disadvantages of Replication
+  - increased cost of update
+  - More complex query optimizer / concurrency control
+
+### Data Fragmentation
+- Divide relation into fragments
+
+1. Horizontal Fragmentation - Fragment relation r by rows
+![alt text](pics/Horizontal_Fragmentation.jpg)
+2. Vertical Fragmentation - Fragment relation r by columns
+![alt text](pics/Vertical_Fragmentation.jpg)
+
+- Advatage of fragmentation
+  - Allow us to use only relavent portion of our app
+  1. Horizontal
+    - Allow parrallel processing on fragment of a relation
+      - If you don't know which branch ur account is in. You can search in parallel on every branch
+    - Allow relation to be split so that tuples are located where they are most frequently accessed
+  2. Vertical
+    - Allow tuples to be split so that each paty of the tuple is stored where it is most frequently accessed
+    - tuple-id attribure allows efficient joining of vertical frangemts
+    - allow parallel processing
+  3. Mixed
+    - Fragments may be successively fragmented to an arbitary depth
+## Distributed DB Architecture
+- app / user interacts with global DB
+- Replication transparency means can see only until replication layer
+- No transparency = remote procedure call, Accessing by API. Call level interface
+
+![alt text](pics/Distributed_DB_Architecture.jpg)
+
+![alt text](pics/Dis_DB_Arch_Transparency.jpg)
+![alt text](pics/Dis_DB_Arch_Transparency_2.jpg)
+
+```
+Global Level :
+Select *
+From S
+where status = 100
+```
+
+```
+Fragments Level :
+Select *
+From S1
+Where status = 100
+Union
+Select *
+From S2
+Where status = 100
+
+Do all for all fragments
+```
+
+```
+Location Level :
+Select *
+From S1 @site1
+Where status = 100
+Union
+Select *
+From S1 @site2
+Where status = 100
+```
+
+### Mixed Fragmentation
+![alt text](pics/Mixed_Fragmentation.jpg)
+- Select employee with department <= 10 to left side(Explining the picture)
+
+![alt text](pics/Mixed_Fragmentation_2.jpg)
+- global level and fragmentation level
+- select into is psuedo code. Some system has select into
+- @siteX is for location level
+
+# It's very hard to implement distributed DB from ground up. Easier to go globsal centralized DB
+
+## Centralized 
+
+### Distributed Transaction
+- Tx may access data at several sites
+- Each site has a local `Tx manager`
+  - maintaining log recovery purpose
+  - things we learned the whole semester
+- Each site has a `Tx coordinator`
+  - Start execution of Tx that originate at the site
+  - Distribute sub Tx at appropriate sites for execution
+  - Coordinating the termination of each Tx that originate at the site
+    - To perform 2PC(2 phase commit)
+
+### Tx system architecture
+![alt text](pics/Tx_system_Arch.jpg)
+
+#### Commit Protocol
+- 2 phase commit
+- 3 phase commit
+- usually 2 phase because less overhead
+
+#### 2 phase commit
+  - fail-stop model : failed site simply stops working, doesn't cause any harm like sending incorrect messages
+  - If a site fail, the Tx aborts
+  - Execution is initiated by Tx coordinator
+  - Synchronous, fail = fail together
+
+1. Phase 1
+  - Coordinator ask all participants to `prepare` to commit Tx Ti
+  - Participants, upon recieving `prepare` messages, Tx manager at site determines if it can commit the Tx
+    - Send `ready` out if ready to commit
+![alt text](pics/Phase1.jpg)
+
+2. Phase 2
+  - T can be commited if Ci recieved `ready` T message. 
+  - otherwise, T must be aborted.
+  - add abortted to log
+![alt text](pics/Phasee2.jpg)
+
+### Sync Vs Async
+![alt text](pics/Sync_VS_ASYNC_Distributed_DB.jpg)
+- Async push
+  - Ex. Primary site sends update to replicate sites in singapore, eventually will get all data
+- Async Pull
+  - Ex. singapore site asks for data
+
+### Primary Sites
+- Single Primary sites (fixed)
+- Multiple primary sites (one at a time)
+  - Ex. You have 2 sites, In the morning site A is primary site. Afternoon site B is primary site
+- Simultaneous primary sites (many at a time)
+  - Conflict resolution rules may choose wchich one iscorrect, maybe the least Tx id, maybe based on time, come first = right
+
+
+# How Distributed DB is impractical
+![alt text](pics/DBMS.png)
+- Impractival
+- Normlly have separate DB for each app
+- Because centralized Db like this is hard to implement
+- you cant dev heterogeneous distributed DB easily
+- IRL ppl buy ERP
+
+# Data Warehouse Concepts
+
+![alt text](pics/Operational_DB_VS_Data_Warehouse.png)
+![alt text](pics/intrgration.png)
+- how do we know m, f is same as 0, 1? which one is male?
+- encode them to make a uniform unit
+- - How do we know a key A in appA represents same object A as the object A in appB with keyB?
+- **Have to solve these before getiting the common Db**
+  
+![alt text](pics/Data_Warehouse.png)
+- Morphrom is a common DB
+- They use citizen ID as a uniform identifier, instead of hospital ID. 
+- We don't usually update data on data warehouse
+  - Could do it but not often 
+- data warehouse's operations : ETL
+  - Extract
+  - Transfer (Transform)
+  - Load
+- Stable, keep past records 10 yrs, 20 yrs  
+- ![alt text](pics/Data_Warehouse_2.png)
+
+![alt text](pics/Common_Key.png)
+- Make sure they have common key
+![alt text](pics/Time_Value.png)
+- Add time value
