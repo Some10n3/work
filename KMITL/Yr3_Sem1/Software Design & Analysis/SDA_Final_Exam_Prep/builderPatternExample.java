@@ -59,6 +59,34 @@ class ConcreteHouseBuilder implements HouseBuilder {
     }
 }
 
+class WoodenHouseBuilder implements HouseBuilder {
+    private House house;
+
+    public WoodenHouseBuilder() {
+        this.house = new House();
+    }
+
+    @Override
+    public void buildFoundation() {
+        house.setFoundation("Wooden foundation");
+    }
+
+    @Override
+    public void buildStructure() {
+        house.setStructure("Wooden structure");
+    }
+
+    @Override
+    public void buildRoof() {
+        house.setRoof("Wooden roof");
+    }
+
+    @Override
+    public House getHouse() {
+        return house;
+    }
+}
+
 // Director class
 class Architect {
     private HouseBuilder builder;
@@ -88,5 +116,13 @@ public class builderPatternExample {
         House house = architect.getHouse();
 
         System.out.println(house);  // Output: House with foundation: Concrete foundation, structure: Concrete and brick structure, roof: Concrete roof
+
+        builder = new WoodenHouseBuilder();
+        architect = new Architect(builder);
+
+        architect.constructHouse();
+        house = architect.getHouse();
+
+        System.out.println(house);  // Output: House with foundation: Wooden foundation, structure: Wooden structure, roof: Wooden roof
     }
 }
