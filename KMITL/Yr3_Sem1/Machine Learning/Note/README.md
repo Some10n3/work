@@ -18,7 +18,7 @@ SVM
 
 
 1.Introduction
-2.Dimensionality reduction
+2.Dimensionality reduction 
 3.Neural Network
 4.Regression 5.Clustering algorithms
 6.Bayesian Learning

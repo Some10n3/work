@@ -21,6 +21,4 @@
 
 ## Space-based
 - eliminates the central database by distributing memory and processing across multiple nodes.
-
-
-> How is Service-Based different from Service-Oriented
+- Dynamic amt of processing unit

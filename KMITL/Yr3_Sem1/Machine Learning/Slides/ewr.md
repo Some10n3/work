@@ -18,7 +18,7 @@ SVM
 
 --------------------------------------------------------------------------
 
-### Supervised Learning
+### Supervised Learning 
 - **Definition:** Learning from labeled data.
 - **Key Concepts:**
   - **Classification vs Regression**
