@@ -433,3 +433,59 @@ Content
 - Root bone position at the ground
 - When moving, move this bone to move the whole mesh
 - Root is at the animation. When moving, will not snap back
+
+
+# Level
+- containers for all gameplay elements
+- mostly actors
+
+## Persistent Level
+- Level you are using
+- Master level
+- Base container for sub levels
+- Can create a separate thread for loading sub levels, which use separate memory than the main game mem
+
+## Sub Level
+- Modular parts of the level
+- Open world game suse this
+- Load things that are not used in every stage of the level
+- When you enter a cave, only render shits inside the cave sub level
+- stop rendering the environmentsin other sub level
+
+## World Partition
+- Dividing world into grid-based sections
+- Minecraft chunks
+
+# Layers and level Streaming
+- When you are on the second floor, unload first floor Layers
+
+## Layers
+- For organizing which to load at a time
+
+## Streaming
+- Sub levels are streamed in and out in async
+
+# Modeling mode
+- mostly used for fast prototyping
+- You should finish mechanic design before level design
+- Work with static mesh
+    - Doesn't mean can't move
+    - Just no skeletons
+    - May cut the mesh into parts, can apply physics to them
+- Speed
+- Flexibility
+- Accessibility
+    - can edit models in app, without going to blender and export lots of things
+- primitive creation
+    - Give you basic shapes
+- Deform basic shapes
+- Boolean operation
+    - overlap blocks to create door holes
+- Sculpting and retopology
+    - retopo some mesh with lots of nodes. make them less nodes
+    - Can do here but do in blender Better
+- UV editing and texturing
+
+![alt text](Notes_images/ModelingMode.png)
+- When creating an object, UE will generate a folder to keep them
+- It will be near the level file

@@ -940,7 +940,7 @@ not load
   - First one is paging
 
 ### Paging (Not pegging)
-- Physical mem is divided into fixed sized blocks called `frames`
+- **Physical mem is divided into fixed sized blocks called `frames`**
 - Logical mem(your program) is divided into fixed sized blocks called `pages`
 - page size and framae size are the same
 - they always come in power of 2 Eg. 2^2, 2^4, 2^8
@@ -953,9 +953,7 @@ not load
   - How many pages will there be in ur program?
 
 - 32 bits OS => Mem size for prog is 4GB (from 2^32 = 4GB)
-- 64 bits OS => Mem size for prog is 
-
-# Go watch later
+- 64 bits OS => Mem size for prog is 2^64 =16 exabytes (EB)=16,777,216 terabytes (TB)
 
 #### Address Translation Scheme
 ![alt text](image-52.png)
@@ -1060,21 +1058,29 @@ Ex.2
 #### Two level page table\
 <!-- ![alt text](image-82.png) -->
 ![alt text](image-84.png)
-![alt text](image-83.png)
+![alt text](image-83.png) 
 
 > Physically OS manage memory with paging, Logically OS use segmentation
 
 ## Segmentation
 ![alt text](image-85.png)
-- Segment memoty logical address
+![alt text](image-97.png)
+- Segment memory logical address
 - Convert logical to physical address
+![alt text](image-98.png)
 
 Ex.
 ![alt text](image-86.png)
 - Segment 1 offset 300, look at base. 6300 means start at 6300, + 300 = 6600
 - If go over limit, invalid
 
-# Watch later
+> In the past we use segmentation with paging
+
+- Logical add divided into Segment page and offset
+- Each segment divided into pages
+![alt text](image-99.png)
+
+> Nowadays OS only use paging. Segments are created only logically in OS
 
 # Virtual memory Managenent
 - Separate logical mem from physical mem
@@ -1136,3 +1142,4 @@ Ex.
 ![alt text](image-94.png)
 ![alt text](image-95.png)
 ![alt text](image-96.png)
+
