@@ -489,3 +489,80 @@ Content
 ![alt text](Notes_images/ModelingMode.png)
 - When creating an object, UE will generate a folder to keep them
 - It will be near the level file
+
+# Sound
+- manage how sounds are played, modified, organized, balanced
+- Using sound cues, classes, and mixed
+
+## Sound Wave
+- sound wave asset
+- raw audio data
+- import from .wav or .mp3
+- hold waveform data and metadata
+
+## Sound Cues
+- layer  manipulate sound waves
+- node based
+- Only one sound playing at a time. Have to use Sound concurrency to play more than one at a time.
+
+> Name your sound cue A_xxxx_cue
+![alt text](Notes_images/SoundCue.png)
+
+![alt text](Notes_images/CreateSoundCue.png)
+- Click Create sound cues, and it will auto create a sound cue that random the selected ones
+
+## Sound Class
+- Organize different type of sounds for global audio setting
+- Normally have :
+    - Master
+        - BGM
+        - SFX
+        - Voice
+        - Voice Multiplayer (Voice chat in valo)
+
+> No prefix for file name, just name them Master, BGM, SFX, etc.
+
+## Sound Class Mix, or Sound Mix
+- allow dynamic adjustment to sound classes during gameplay
+- Mos of the time one is enough
+    - Might have more than one, one for menu, one for in game
+
+![alt text](Notes_images/SoundMix.png)
+- Add classes to sound mix
+- Tick apply to children on Master. So when you reduce master volume, the children also gets reduced
+- 
+
+## Sound Modifier
+- Modify sound
+
+## Sound Concurrency
+- Control how many instances of sound can be played simultaenously
+
+## Sound Attenuation
+- How sound fades with distance and interacts with the environments
+
+## Sound Actor 
+### Ambient Sound
+- When applying sound attenuation, Ambient sound actor will be the location when sound comes from
+
+## Audio Components
+- Ublike Ambient sound, Attatch this to actor to tell where to output sound
+- Ex. attatch to mouth
+
+## Audio Listener (Player Controller)
+- Tell player controller where to listen to sound
+- Should attatch to actor's capsule Components or else it will be attatched to camera, if you move cam to another room, you will heare things in that room (problem with 3rd person)
+- Attatch when possessing a pawn with `Set audio listener override`. Also unattatch when unpossessing.
+
+# Commands for sound and audio
+
+## command for debug sound
+- `au.Debug.Sounds`
+    - allow debug
+- au.3dVisualize.Enabled
+    - 
+- au.3dVisualize.Attenuation
+    - Visualizes the attenuation
+    - Show 2 area(sphere), inner one is the area that you hear 100% if u inside, outer one is faded sound
+- au.3dVisualize.SpatialSources
+    - visualizes spatial audio (left right)
