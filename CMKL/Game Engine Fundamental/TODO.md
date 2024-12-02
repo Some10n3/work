@@ -566,3 +566,63 @@ Content
     - Show 2 area(sphere), inner one is the area that you hear 100% if u inside, outer one is faded sound
 - au.3dVisualize.SpatialSources
     - visualizes spatial audio (left right)
+
+# Lecture : 11 / 16 / 2024
+
+# AI Controller 
+- Manage and drive behavior of AI characters
+- Enable NPCs to act autonomously based on event graph
+- Works in combination with a behavior tree component and a blackboard component
+
+## Behavior Tree
+![alt text](Notes_images/Behavior_Tree.png)
+- Hierarical Decision making system
+- Each node is a decision or an action
+- Naming convention : BT_
+- If named the same as BB component, will automatically match them
+
+## Black Board Component
+![alt text](Notes_images/BlackBoard.png)
+- Shared data storage(memory) for the behavior tree
+- central memory hub holding key data that the behavior tree and AI controller uses
+- Black board key
+- Naming convention : BB_
+- Behavior tree write/read into the blackboard
+- `Instance synced` is to share this key with instances that use same board with same parent
+- Persistent memory
+- Reusable / Scalable
+    - Different Ai characters can share a behavior tree while holding unique character specific data
+![alt text](Notes_images/BlackBoard2.png)
+- Inheriting from parent
+![alt text](Notes_images/Custom_BT_Task.png)
+![alt text](Notes_images/SetBlackBoardInt.png)
+
+### Composite Node
+- Sequence
+    - Do event in sequence til last one or fail, if fail, go back to parent node
+    - Do until fail and go back to parent
+- Selector
+    - If one success, stop
+    - Do until success and go back to parent
+
+### Decorator
+- Add condition to a node, if condition true, nodes below works
+- Add to Events or Composite nodes
+![alt text](Notes_images/BB_Decorator.png)
+- Ex. Blackboard count > 0, then do move to
+
+### Service Node
+- Background process that continously update blackboard values
+- Fetching actor's variable continously is heavy for performance(getting whole object and casting on everynode)
+    - Instead, we use a service node to get/cast only on initiated and create an event to update them on every tick.
+- Attatched to composite node
+- unlike decorator, this is under composite node
+- Run while BT is active and keeps on updating tha value
+
+### Task Node
+- Actual actions
+- 
+
+## Flow Abort(Observer abort)
+- 
+![alt text](Notes_images/FlowAbortTable.png)
