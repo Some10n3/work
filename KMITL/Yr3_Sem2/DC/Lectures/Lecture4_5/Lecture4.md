@@ -85,3 +85,7 @@
 
 > Total ordering is very useful, simple but expensive
 
+
+
+
+
