@@ -1,0 +1,10 @@
+loadI 1  ⇒ r1      // s = 1
+loadI 0  ⇒ r2      // i = 0
+loop:
+    cmp_GE r2, r3 ⇒ r4  // if i >= n, exit loop
+    cbr r4, exit, body
+body:
+    mult r1, r2 ⇒ r1  // s *= i
+    addI r2, 1 ⇒ r2   // i++
+    jumpI → loop
+exit:

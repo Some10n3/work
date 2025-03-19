@@ -7,3 +7,5 @@ NotMine/
 *.csv
 /CMKL/Game Engine Fundamental/Assignments
 /KMITL/Yr3_Sem2/Computer Graphics and Mixed Reality/pyopengl_env
+/KMITL/Yr3_Sem2/Computer Graphics and Mixed Reality/Lab/Lab7/lab7_env
+*.pyc

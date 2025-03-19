@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>A-Frame WebXR - Custom Animation Components</title>
+    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Sky with Texture -->
+      <a-sky src="./floor.jpg"></a-sky>
+
+      <!-- Ground with Texture -->
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="20"
+        height="20"
+        src="./floor.jpg"
+        repeat="10 10"
+        change-color
+        teleport-on-click
+      >
+      </a-plane>
+
+      <!-- Static Box -->
+      <a-box
+      teleportation="targetPosition: 3 1 0"
+        position="-2 1 -3"
+        rotation="0 45 0"
+        width="1"
+        height="1"
+        depth="1"
+        src="./mable.png"
+        pulsating
+        sound-effect
+        change-color
+        floating
+        change-size
+      >
+      </a-box>
+
+      <!-- Sphere -->
+      <a-sphere
+        position="2 1 -3"
+        radius="0.5"
+        src="./image.png"
+        pulsating
+        sound-effect
+        change-color
+        rotating
+        bouncing
+        change-size
+      >
+      </a-sphere>
+
+      <!-- Cylinder -->
+      <a-cylinder
+        id="soundCylinder"
+        position="3 1 -3"
+        radius="0.5"
+        height="1.5"
+        src="./image.png"
+        pulsating
+        sound-effect
+        change-color
+        rotating
+        change-size
+      >
+      </a-cylinder>
+
+      <!-- oiia cat -->
+      <a-gltf-model
+        id="cat"
+        src="models/scene.gltf"
+        position="3 1 2"
+        scale="3 3 3"
+        rotation="0 180 0"
+        rotating
+      >
+      </a-gltf-model>
+
+      <!-- Cone -->
+      <a-cone
+        position="0 1 -5"
+        radius-bottom="0.5"
+        height="1.5"
+        src="./image.png"
+        change-size
+      >
+      </a-cone>
+
+      <!-- Light Source -->
+      <a-light type="ambient" color="#ffffff"></a-light>
+      <a-light type="directional" position="0 1 0" intensity="1"></a-light>
+
+      <!-- Sound Asset -->
+      <a-assets>
+        <audio id="clickSound" src="./mouse-click.mp3"></audio>
+      </a-assets>
+
+      <!-- Camera & Cursor -->
+      <a-entity position="0 1.6 0" camera-rig>
+        <a-camera>
+          <a-cursor color="#c1ff31" ></a-cursor>
+        </a-camera>
+      </a-entity>
+
+    </a-scene>
+
+    <script>
+      // Change Color on Click
+      AFRAME.registerComponent("change-color", {
+        init: function () {
+          this.el.addEventListener("click", () => {
+            this.el.setAttribute("color", getRandomColor());
+          });
+        },
+      });
+
+      // Sound Effect on Click
+      AFRAME.registerComponent("sound-effect", {
+        init: function () {
+          this.el.addEventListener("click", () => {
+            let sound = document.createElement("a-sound");
+            sound.setAttribute("src", "#clickSound");
+            sound.setAttribute("autoplay", "true");
+            this.el.appendChild(sound);
+          });
+        },
+      });
+
+      // Bouncing Animation Component
+      AFRAME.registerComponent("bouncing", {
+        schema: { speed: { type: "number", default: 1000 } },
+        tick: function (time, deltaTime) {
+          let z = Math.sin(time / this.data.speed) * 0.5 - 3;
+          this.el.setAttribute("position", `0 4 ${z}`);
+        },
+      });
+
+      // Rotating Animation Component
+      AFRAME.registerComponent("rotating", {
+        schema: { speed: { type: "number", default: 1000 } },
+        init: function () {
+          this.el.addEventListener("click", () => {
+            this.el.removeAttribute("rotating");
+          });
+        },
+        tick: function (time, deltaTime) {
+          let rotation = this.el.getAttribute("rotation");
+          this.el.setAttribute("rotation", {
+            x: rotation.x,
+            y: (rotation.y + deltaTime * 0.8) % 360,
+            z: rotation.z,
+          });
+        },
+      });
+
+      // Pulsating Animation Component
+      AFRAME.registerComponent("pulsating", {
+        schema: { speed: { type: "number", default: 1000 } },
+        tick: function (time, deltaTime) {
+          let scale = Math.sin(time / this.data.speed) * 0.2 + 1;
+          this.el.setAttribute("scale", `${scale} ${scale} ${scale}`);
+        },
+      });
+
+      // Floating Animation Component
+      AFRAME.registerComponent("floating", {
+        schema: { speed: { type: "number", default: 2000 } },
+        tick: function (time, deltaTime) {
+          let y = Math.sin(time / this.data.speed) * 0.2 + 1;
+          this.el.setAttribute("position", `-2 ${y} -3`);
+        },
+      });
+
+      // Change Size on Click
+      AFRAME.registerComponent("change-size", {
+        init: function () {
+          this.el.addEventListener("click", () => {
+            let scale = Math.random() * 2 + 0.5;
+            this.el.setAttribute("scale", `${scale} ${scale} ${scale}`);
+          });
+        },
+      });
+
+      // Teleportation Component
+     AFRAME.registerComponent("teleportation", {
+      schema: {
+        targetPosition: { type: "vec3", default: { x: 0, y: 1.6, z: 0 } },
+      },
+      init: function () {
+        window.addEventListener("keydown", (event) => {
+          if (event.key.toLowerCase() === "t") {
+            console.log("Teleporting to:", this.data.targetPosition);
+            // Use setAttribute to move the entity
+            this.el.setAttribute("position", {
+              x: this.data.targetPosition.x,
+              y: this.data.targetPosition.y,
+              z: this.data.targetPosition.z,
+            });
+            
+          }
+        });
+      },
+    });
+    AFRAME.registerComponent("teleport-on-click", {
+  init: function () {
+    // Add a click event listener to the entity with this component
+    this.el.addEventListener("click", (event) => {
+      // Get the intersection point from the event detail
+      const clickPoint = event.detail.intersection.point;
+
+      // Find the camera rig entity
+      const cameraRig = document.querySelector("[camera-rig]");
+
+      if (cameraRig) {
+        console.log("Teleporting camera rig to:", clickPoint);
+        cameraRig.setAttribute("position", {
+          x: clickPoint.x,
+          y: 1.6, // Maintain the camera height
+          z: clickPoint.z,
+        });
+      }
+    });
+  },
+});
+
+
+
+
+      // Generate a Random Color
+      function getRandomColor() {
+        return "#" + Math.floor(Math.random() * 16777215).toString(16);
+      }
+    </script>
+  </body>
+</html>

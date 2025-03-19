@@ -1,0 +1,73 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Main\\work\\KMITL\\Yr3_Sem2\\Computer Graphics and Mixed Reality\\NotificationListener\\NotificationListener.csproj": {}
+  },
+  "projects": {
+    "D:\\Main\\work\\KMITL\\Yr3_Sem2\\Computer Graphics and Mixed Reality\\NotificationListener\\NotificationListener.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Main\\work\\KMITL\\Yr3_Sem2\\Computer Graphics and Mixed Reality\\NotificationListener\\NotificationListener.csproj",
+        "projectName": "NotificationListener",
+        "projectPath": "D:\\Main\\work\\KMITL\\Yr3_Sem2\\Computer Graphics and Mixed Reality\\NotificationListener\\NotificationListener.csproj",
+        "packagesPath": "C:\\Users\\Some10n3.LAPTOP-FLIDQE0T\\.nuget\\packages\\",
+        "outputPath": "D:\\Main\\work\\KMITL\\Yr3_Sem2\\Computer Graphics and Mixed Reality\\NotificationListener\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Some10n3.LAPTOP-FLIDQE0T\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "System.Diagnostics.EventLog": {
+              "target": "Package",
+              "version": "[9.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.102/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

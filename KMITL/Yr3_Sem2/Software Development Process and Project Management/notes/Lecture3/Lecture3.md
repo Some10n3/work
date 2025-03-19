@@ -1,5 +1,3 @@
-# asd
-
 # Unified Process(UP)
 - RUP - Rational Unified Process
 
